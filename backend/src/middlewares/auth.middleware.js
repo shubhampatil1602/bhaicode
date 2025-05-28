@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import { db } from "../libs/db.js";
 
-export const authMiddleware = async (req, res, next) => {
+const authMiddleware = async (req, res, next) => {
   try {
     const token = req.cookies.jwt;
     if (!token) {
@@ -40,3 +40,29 @@ export const authMiddleware = async (req, res, next) => {
     res.status(500).json({ error: "Error authenticating user" });
   }
 };
+
+const checkAdmin = async (req, res, next) => {
+  try {
+    const userId = req.user.id;
+    const user = await db.user.findUnique({
+      where: {
+        id: userId,
+      },
+      select: {
+        role: true,
+      },
+    });
+
+    if (!user && user.role !== "ADMIN") {
+      return res.status(403).json({
+        error: "Access Denied - Admins only",
+      });
+    }
+    next();
+  } catch (error) {
+    console.error("checkAdmin middleware: ", error);
+    res.status(500).json({ error: "Error authenticating admin" });
+  }
+};
+
+export { authMiddleware, checkAdmin };
