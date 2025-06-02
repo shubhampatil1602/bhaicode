@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { authmiddleware } from "../middlewares/auth.middleware.js";
+import { authMiddleware } from "../middlewares/auth.middleware.js";
 import {
   getAllSubmissions,
   getAllSubmissionsCountForProblem,
@@ -12,7 +12,7 @@ submitionRoutes.get("/get-all-submissions", getAllSubmissions);
 submitionRoutes.get("/get-submission/:problemId", getSubmissionsForProblem);
 submitionRoutes.get(
   "/get-submissionsCount/:problemId",
-  authmiddleware,
+  authMiddleware,
   getAllSubmissionsCountForProblem
 );
 
