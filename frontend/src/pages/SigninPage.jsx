@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 import { Signin } from "@/components/Signin";
-import CodeBg from "@/components/CodeBg";
+import { CodeBg } from "@/components/CodeBg";
 import { Code2 } from "lucide-react";
 
 const SigninPage = () => {

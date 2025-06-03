@@ -1,7 +1,7 @@
 import { Code, Terminal, FileCode, Braces, Code2 } from "lucide-react";
 import { useEffect, useState } from "react";
 
-const CodeBg = ({ title, subtitle }) => {
+export const CodeBg = ({ title, subtitle }) => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   // Code snippets to display in the background
@@ -125,5 +125,3 @@ function reverseList(head) {
     </div>
   );
 };
-
-export default CodeBg;

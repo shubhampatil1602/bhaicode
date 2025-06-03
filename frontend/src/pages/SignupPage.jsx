@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 import { Signup } from "@/components/Signup";
 import { Code2 } from "lucide-react";
-import CodeBg from "@/components/CodeBg";
+import { CodeBg } from "@/components/CodeBg";
 
 const SignupPage = () => {
   return (

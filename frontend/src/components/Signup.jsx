@@ -1,15 +1,19 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { cn } from "@/lib/utils";
+import { useAuthStore } from "@/store/useAuthStore";
+import { SignupSchema } from "@/zodSchemas/auth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { SignupSchema } from "@/zodSchemas/auth";
-import ErrorMessage from "./ErrorMessage";
+import { ErrorMessage } from "./ErrorMessage";
+import { Loader } from "lucide-react";
 
 export const Signup = ({ className, ...props }) => {
+  const [singnUpLoader, setSignUpLoader] = useState(false);
   const {
     register,
     handleSubmit,
@@ -18,8 +22,20 @@ export const Signup = ({ className, ...props }) => {
     resolver: zodResolver(SignupSchema),
   });
 
+  const { signUp } = useAuthStore();
+
+  const navigate = useNavigate();
+
   const onSubmit = async (data) => {
-    console.log(data);
+    try {
+      setSignUpLoader(true);
+      await signUp(data);
+      navigate("/");
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setSignUpLoader(false);
+    }
   };
 
   return (
@@ -69,8 +85,15 @@ export const Signup = ({ className, ...props }) => {
         </div>
         {errors.password && <ErrorMessage message={errors.password.message} />}
 
-        <Button type='submit' className='w-full'>
-          Register
+        <Button
+          disabled={singnUpLoader}
+          type='submit'
+          className='w-full disabled:pointer-events-none disabled:cursor-not-allowed transition-all duration-300 ease-in-out hover:bg-primary/80 hover:text-primary-foreground'
+        >
+          {singnUpLoader && (
+            <Loader className='animate-spin h-5 w-5 text-white' />
+          )}{" "}
+          Sign Up
         </Button>
       </div>
       <div className='text-center text-sm'>

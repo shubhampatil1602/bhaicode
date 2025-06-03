@@ -1,15 +1,19 @@
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { cn } from "@/lib/utils";
+import { useAuthStore } from "@/store/useAuthStore";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { SigninSchema } from "@/zodSchemas/auth";
-import ErrorMessage from "./ErrorMessage";
+import { ErrorMessage } from "./ErrorMessage";
+import { useState } from "react";
+import { Loader } from "lucide-react";
 
 export const Signin = ({ className, ...props }) => {
+  const [singnInLoader, setSignInLoader] = useState(false);
   const {
     register,
     handleSubmit,
@@ -18,8 +22,20 @@ export const Signin = ({ className, ...props }) => {
     resolver: zodResolver(SigninSchema),
   });
 
+  const { signIn } = useAuthStore();
+
+  const navigate = useNavigate();
+
   const onSubmit = async (data) => {
-    console.log(data);
+    try {
+      setSignInLoader(true);
+      signIn(data);
+      navigate("/");
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setSignInLoader(false);
+    }
   };
 
   return (
@@ -58,7 +74,14 @@ export const Signin = ({ className, ...props }) => {
         </div>
         {errors.password && <ErrorMessage message={errors.password.message} />}
 
-        <Button type='submit' className='w-full'>
+        <Button
+          disabled={singnInLoader}
+          type='submit'
+          className='w-full disabled:pointer-events-none disabled:cursor-not-allowed transition-all duration-300 ease-in-out hover:bg-primary/80 hover:text-primary-foreground'
+        >
+          {singnInLoader && (
+            <Loader className='animate-spin h-5 w-5 text-white' />
+          )}{" "}
           Sign In
         </Button>
       </div>
