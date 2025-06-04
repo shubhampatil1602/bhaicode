@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -9,11 +10,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { SigninSchema } from "@/zodSchemas/auth";
 import { ErrorMessage } from "./ErrorMessage";
-import { useState } from "react";
 import { Loader } from "lucide-react";
 
 export const Signin = ({ className, ...props }) => {
-  const [singnInLoader, setSignInLoader] = useState(false);
+  const [signInLoader, setSignInLoader] = useState(false);
   const {
     register,
     handleSubmit,
@@ -75,11 +75,11 @@ export const Signin = ({ className, ...props }) => {
         {errors.password && <ErrorMessage message={errors.password.message} />}
 
         <Button
-          disabled={singnInLoader}
+          disabled={signInLoader}
           type='submit'
           className='w-full disabled:pointer-events-none disabled:cursor-not-allowed transition-all duration-300 ease-in-out hover:bg-primary/80 hover:text-primary-foreground'
         >
-          {singnInLoader && (
+          {signInLoader && (
             <Loader className='animate-spin h-5 w-5 text-white' />
           )}{" "}
           Sign In

@@ -5,7 +5,7 @@ export const CodeBg = ({ title, subtitle }) => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   // Code snippets to display in the background
-  const codeSnippets = [
+  const codeSnippet = [
     `function twoSum(nums, target) {
   const map = new Map();
   for (let i = 0; i < nums.length; i++) {
@@ -59,10 +59,10 @@ function reverseList(head) {
   // Rotate through code snippets
   useEffect(() => {
     const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % codeSnippets.length);
+      setActiveIndex((prev) => (prev + 1) % codeSnippet.length);
     }, 3000);
     return () => clearInterval(interval);
-  }, [codeSnippets.length]);
+  }, [codeSnippet.length]);
 
   return (
     <div className='hidden lg:flex flex-col items-center justify-center bg-neutral-900 text-white p-12 relative overflow-hidden h-full'>
@@ -104,7 +104,7 @@ function reverseList(head) {
           {/* Code content */}
           <div className='p-4 font-mono text-xs sm:text-sm overflow-scroll relative h-64 my-auto'>
             <pre className='whitespace-pre-wrap text-green-400 transition-opacity duration-1000'>
-              {codeSnippets[activeIndex]}
+              {codeSnippet[activeIndex]}
             </pre>
           </div>
         </div>
