@@ -44,7 +44,7 @@ const executeCode = async (req, res) => {
       const expected = expected_outputs[i]?.trim();
       const passed = stdout === expected;
 
-      if (!allPassed) allPassed = false;
+      if (!passed) allPassed = false;
 
       return {
         testCase: i + 1,
@@ -109,7 +109,7 @@ const executeCode = async (req, res) => {
       stdout: result.stdout,
       expected: result.expected,
       stderr: result.stderr,
-      compileOutput: result.compiled_output,
+      compiledOutput: result.compiled_output,
       status: result.status,
       memory: result.memory,
       time: result.time,
@@ -124,7 +124,7 @@ const executeCode = async (req, res) => {
         id: submission.id,
       },
       include: {
-        testCaseResults: true,
+        testCases: true,
       },
     });
 
