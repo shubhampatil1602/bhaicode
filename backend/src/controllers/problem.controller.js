@@ -280,6 +280,7 @@ const deleteProblem = async (req, res) => {
     return res.status(200).json({
       success: true,
       message: "Problem deleted successfully",
+      id: problem.id,
     });
   } catch (error) {
     console.error("error deleting problem: ", error);

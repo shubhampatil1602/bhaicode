@@ -7,14 +7,16 @@ import { ProblemFilters } from "./components/problem-filters";
 import { ProblemTable } from "./components/problem-table";
 import { Pagination } from "./components/pagination";
 import { Plus } from "lucide-react";
+import { useProblemStore } from "@/store/useProblemStore";
 
-export const AllProblems = ({ problems }) => {
+export const AllProblems = () => {
   const [search, setSearch] = useState("");
   const [difficulty, setDifficulty] = useState("ALL");
   const [selectedTag, setSelectedTag] = useState("ALL");
   const [currentPage, setCurrentPage] = useState(1);
 
   const { authUser } = useAuthStore();
+  const { deleteProblem, isProblemLoading, problems } = useProblemStore();
 
   const { allTags, filteredProblems } = useProblemFilters(
     problems,
@@ -31,8 +33,7 @@ export const AllProblems = ({ problems }) => {
   );
 
   const handleDelete = async (id) => {
-    // TODO: Implement delete functionality
-    console.log(id);
+    await deleteProblem(id);
   };
 
   const handleAddToPlaylist = async (id) => {
@@ -63,6 +64,7 @@ export const AllProblems = ({ problems }) => {
         problems={paginatedProblems}
         authUser={authUser}
         onDelete={handleDelete}
+        isDeletingProblem={isProblemLoading}
         onAddToPlaylist={handleAddToPlaylist}
       />
 

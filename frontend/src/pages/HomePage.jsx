@@ -25,7 +25,7 @@ const HomePage = () => {
       </p>
 
       {problems.length > 0 ? (
-        <AllProblems problems={problems} />
+        <AllProblems />
       ) : (
         <div className='mt-8 text-center'>
           <p className='text-sm text-neutral-500 dark:text-neutral-400'>

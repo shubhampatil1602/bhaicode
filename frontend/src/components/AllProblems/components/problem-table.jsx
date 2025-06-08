@@ -1,7 +1,18 @@
 import { Link } from "react-router-dom";
-import { Bookmark, PencilIcon, TrashIcon } from "lucide-react";
+import { Bookmark, Loader, PencilIcon, TrashIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import {
   Table,
   TableBody,
@@ -17,6 +28,7 @@ export const ProblemTable = ({
   problems,
   authUser,
   onDelete,
+  isDeletingProblem,
   onAddToPlaylist,
 }) => {
   return (
@@ -69,15 +81,40 @@ export const ProblemTable = ({
                     <div className='flex flex-col md:flex-row gap-2 items-start md:items-center'>
                       {authUser?.role === "ADMIN" && (
                         <div className='flex gap-1'>
-                          <Button
-                            onClick={() => onDelete(problem.id)}
-                            className='bg-red-500 hover:bg-red-600 text-white'
-                          >
-                            <TrashIcon className='size-3' />
-                          </Button>
+                          <AlertDialog>
+                            <AlertDialogTrigger asChild>
+                              <Button className='text-red-500 border border-red-500 bg-red-200 hover:bg-red-300/10'>
+                                {isDeletingProblem ? (
+                                  <Loader className='size-3 animate-spin' />
+                                ) : (
+                                  <TrashIcon className='size-3' />
+                                )}
+                              </Button>
+                            </AlertDialogTrigger>
+                            <AlertDialogContent>
+                              <AlertDialogHeader>
+                                <AlertDialogTitle>
+                                  Are you sure?
+                                </AlertDialogTitle>
+                                <AlertDialogDescription>
+                                  This action cannot be undone. This will
+                                  permanently delete the problem.
+                                </AlertDialogDescription>
+                              </AlertDialogHeader>
+                              <AlertDialogFooter>
+                                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                <AlertDialogAction
+                                  onClick={() => onDelete(problem.id)}
+                                  className='bg-red-500 hover:bg-red-600 text-white'
+                                >
+                                  Delete
+                                </AlertDialogAction>
+                              </AlertDialogFooter>
+                            </AlertDialogContent>
+                          </AlertDialog>
                           <Button
                             disabled
-                            className='bg-sky-500 hover:bg-sky-700 text-white'
+                            className='text-sky-500 border border-sky-500 bg-sky-200 hover:bg-sky-300/10'
                           >
                             <PencilIcon className='size-3' />
                           </Button>
