@@ -8,8 +8,12 @@ import {
 
 const submitionRoutes = Router();
 
-submitionRoutes.get("/get-all-submissions", getAllSubmissions);
-submitionRoutes.get("/get-submission/:problemId", getSubmissionsForProblem);
+submitionRoutes.get("/get-all-submissions", authMiddleware, getAllSubmissions);
+submitionRoutes.get(
+  "/get-submission/:problemId",
+  authMiddleware,
+  getSubmissionsForProblem
+);
 submitionRoutes.get(
   "/get-submissionsCount/:problemId",
   authMiddleware,
