@@ -1,11 +1,7 @@
 import { AddProblemForm } from "../components/AddProblemForm";
 
 const AddProblem = () => {
-  return (
-    <div>
-      <AddProblemForm />
-    </div>
-  );
+  return <AddProblemForm />;
 };
 
 export default AddProblem;

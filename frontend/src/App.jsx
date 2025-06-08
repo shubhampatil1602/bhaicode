@@ -1,16 +1,17 @@
 import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 
-import { PublicRoute } from "./components/PublicRoute";
-import { ProtectedRoute } from "./components/ProtectedRoute";
-import { Layout } from "./components/Layout";
+import { useAuthStore } from "./store/useAuthStore";
 import HomePage from "./pages/HomePage";
 import SignupPage from "./pages/SignupPage";
 import SigninPage from "./pages/SigninPage";
-import { useAuthStore } from "./store/useAuthStore";
-import { Loader } from "lucide-react";
-import { AdminRoute } from "./components/AdminRoute";
 import AddProblem from "./pages/AddProblem";
+import ProblemPage from "./pages/ProblemPage";
+import { PublicRoute } from "./components/PublicRoute";
+import { ProtectedRoute } from "./components/ProtectedRoute";
+import { AdminRoute } from "./components/AdminRoute";
+import { Layout } from "./components/Layout";
+import { Loader } from "lucide-react";
 
 const App = () => {
   const { authUser, checkAuth, isCheckingAuth } = useAuthStore();
@@ -30,9 +31,6 @@ const App = () => {
   return (
     <div className='flex flex-col items-center justify-start'>
       <Routes>
-        {/* <Route element={<Layout />}>
-        </Route> */}
-
         <Route element={<PublicRoute authUser={authUser} />}>
           <Route path='/signin' element={<SigninPage />} />
           <Route path='/signup' element={<SignupPage />} />
@@ -41,9 +39,10 @@ const App = () => {
         <Route element={<ProtectedRoute authUser={authUser} />}>
           <Route element={<Layout />}>
             <Route path='/' index element={<HomePage />} />
+            <Route path='/problem/:id' element={<ProblemPage />} />
+
             <Route element={<AdminRoute />}>
               <Route path='/add-problem' element={<AddProblem />} />
-              {/* <Route path='/all-problems' element={<AllProblems />} /> */}
             </Route>
           </Route>
         </Route>

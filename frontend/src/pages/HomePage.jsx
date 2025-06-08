@@ -13,7 +13,6 @@ const HomePage = () => {
     return <div>TODO: Add shimmer card</div>;
   }
 
-  console.log(problems);
   return (
     <section className='w-full flex flex-col items-center justify-center  px-4'>
       <h1 className='text-4xl font-extrabold z-10 text-center'>
@@ -25,7 +24,7 @@ const HomePage = () => {
         problems
       </p>
 
-      {!!problems.length > 0 ? (
+      {problems.length > 0 ? (
         <AllProblems problems={problems} />
       ) : (
         <div className='mt-8 text-center'>
