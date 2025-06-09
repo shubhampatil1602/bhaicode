@@ -17,6 +17,8 @@ const createProblem = async (req, res) => {
     testcases,
     codeSnippet,
     referenceSolutions,
+    editorial,
+    hints,
   } = req.body;
 
   // check user role admin/user
@@ -81,6 +83,8 @@ const createProblem = async (req, res) => {
           codeSnippet,
           referenceSolutions,
           userId: req.user.id,
+          editorial: editorial || "",
+          hints: hints || "",
         },
       });
 
@@ -161,6 +165,8 @@ const updateProblem = async (req, res) => {
     testcases,
     codeSnippet,
     referenceSolutions,
+    editorial,
+    hints,
   } = req.body;
 
   // check user role admin/user
@@ -237,6 +243,8 @@ const updateProblem = async (req, res) => {
           codeSnippet,
           referenceSolutions,
           userId: req.user.id,
+          editorial: editorial || "",
+          hints: hints || "",
         },
       });
 
