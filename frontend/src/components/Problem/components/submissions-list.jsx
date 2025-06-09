@@ -5,7 +5,14 @@ import {
   MemoryStick as Memory,
   Calendar,
 } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 
@@ -44,23 +51,38 @@ export const SubmissionsList = ({ submissions, isLoading }) => {
   if (isLoading) {
     return (
       <div className='space-y-4'>
-        {[1, 2, 3].map((i) => (
-          <Card key={i}>
-            <CardContent className='p-4'>
-              <div className='flex items-center justify-between'>
-                <div className='flex items-center gap-4'>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Status</TableHead>
+              <TableHead>Language</TableHead>
+              <TableHead>Runtime</TableHead>
+              <TableHead>Memory</TableHead>
+              <TableHead>Date</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {[1, 2, 3].map((i) => (
+              <TableRow key={i}>
+                <TableCell>
                   <Skeleton className='h-6 w-24' />
+                </TableCell>
+                <TableCell>
                   <Skeleton className='h-6 w-16' />
-                </div>
-                <div className='flex items-center gap-4'>
-                  <Skeleton className='h-4 w-16' />
-                  <Skeleton className='h-4 w-16' />
-                  <Skeleton className='h-4 w-24' />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
+                </TableCell>
+                <TableCell>
+                  <Skeleton className='h-6 w-16' />
+                </TableCell>
+                <TableCell>
+                  <Skeleton className='h-6 w-16' />
+                </TableCell>
+                <TableCell>
+                  <Skeleton className='h-6 w-24' />
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
       </div>
     );
   }
@@ -68,28 +90,32 @@ export const SubmissionsList = ({ submissions, isLoading }) => {
   // No submissions state
   if (!submissions?.length) {
     return (
-      <Card>
-        <CardContent className='p-8'>
-          <div className='text-center text-muted-foreground'>
-            No submissions yet
-          </div>
-        </CardContent>
-      </Card>
+      <div className='text-center text-muted-foreground'>
+        No submissions yet
+      </div>
     );
   }
 
   return (
-    <div className='space-y-4'>
-      {submissions.map((submission) => {
-        const avgMemory = calculateAverageMemory(submission.memory);
-        const avgTime = calculateAverageTime(submission.time);
+    <div className='rounded-md border'>
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead>Status</TableHead>
+            <TableHead>Language</TableHead>
+            <TableHead>Runtime</TableHead>
+            <TableHead>Memory</TableHead>
+            <TableHead>Date</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {submissions.map((submission) => {
+            const avgMemory = calculateAverageMemory(submission.memory);
+            const avgTime = calculateAverageTime(submission.time);
 
-        return (
-          <Card key={submission.id} className='transition-all hover:shadow-md'>
-            <CardContent>
-              <div className='flex items-center justify-between'>
-                {/* Left Section: Status and Language */}
-                <div className='flex items-center gap-4'>
+            return (
+              <TableRow key={submission.id} className='hover:bg-muted/50'>
+                <TableCell>
                   {submission.status === "Accepted" ? (
                     <div className='flex items-center gap-2 text-green-600'>
                       <CheckCircle2 className='w-5 h-5' />
@@ -101,33 +127,37 @@ export const SubmissionsList = ({ submissions, isLoading }) => {
                       <span className='font-medium'>{submission.status}</span>
                     </div>
                   )}
+                </TableCell>
+                <TableCell>
                   <Badge variant='secondary' className='font-mono'>
                     {submission.language}
                   </Badge>
-                </div>
-
-                {/* Right Section: Runtime, Memory, and Date */}
-                <div className='flex items-center gap-6 text-muted-foreground'>
-                  <div className='flex items-center gap-1.5'>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center gap-1.5 text-muted-foreground'>
                     <Clock className='w-4 h-4' />
                     <span className='text-sm'>{avgTime.toFixed(3)} s</span>
                   </div>
-                  <div className='flex items-center gap-1.5'>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center gap-1.5 text-muted-foreground'>
                     <Memory className='w-4 h-4' />
                     <span className='text-sm'>{avgMemory.toFixed(0)} KB</span>
                   </div>
-                  <div className='flex items-center gap-1.5'>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center gap-1.5 text-muted-foreground'>
                     <Calendar className='w-4 h-4' />
                     <span className='text-sm'>
                       {new Date(submission.createdAt).toLocaleDateString()}
                     </span>
                   </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        );
-      })}
+                </TableCell>
+              </TableRow>
+            );
+          })}
+        </TableBody>
+      </Table>
     </div>
   );
 };

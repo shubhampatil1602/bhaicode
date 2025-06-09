@@ -46,9 +46,10 @@ export const ProblemTable = ({
         <TableBody>
           {problems.length > 0 ? (
             problems.map((problem) => {
-              const isSolved = problem.solvedBy.some(
-                (user) => user.userId === authUser?.id
-              );
+              const isSolved =
+                problem.solvedBy?.some(
+                  (user) => user.userId === authUser?.id
+                ) || false;
 
               return (
                 <TableRow key={problem.id}>
@@ -112,16 +113,16 @@ export const ProblemTable = ({
                               </AlertDialogFooter>
                             </AlertDialogContent>
                           </AlertDialog>
-                          <Button
-                            disabled
-                            className='text-sky-500 border border-sky-500 bg-sky-200 hover:bg-sky-300/10'
-                          >
-                            <PencilIcon className='size-3' />
-                          </Button>
+                          <Link to={`/edit-problem/${problem.id}`}>
+                            <Button className='text-sky-500 border border-sky-500 bg-sky-200 hover:bg-sky-300/10'>
+                              <PencilIcon className='size-3' />
+                            </Button>
+                          </Link>
                         </div>
                       )}
                       <Button
-                        className='flex gap-2 items-center'
+                        className='flex gap-2 items-center border border-neutral-600 hover:bg-neutral-600/10'
+                        variant='secondary'
                         onClick={() => onAddToPlaylist(problem.id)}
                       >
                         <Bookmark className='size-3' />

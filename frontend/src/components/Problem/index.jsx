@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useProblemStore } from "@/store/useProblemStore";
 import { useSubmissionStore } from "@/store/useSubmissionStore";
 import { useExecutionStore } from "@/store/useExecutionStore";
-import { ProblemHeader } from "./components/problem-header";
 import { ProblemContent } from "./components/problem-content";
 import { ProblemLoading } from "./components/problem-loading";
 import { getLanguageId } from "./utils/languageUtils";
@@ -11,7 +10,6 @@ export const Problem = ({ id }) => {
   const [code, setCode] = useState("");
   const [activeTab, setActiveTab] = useState("description");
   const [selectedLanguage, setSelectedLanguage] = useState("javascript");
-  const [isBookmarked, setIsBookmarked] = useState(false);
   const [testCases, setTestCases] = useState([]);
 
   const { getProblemById, problem, isProblemLoading } = useProblemStore();
@@ -73,16 +71,9 @@ export const Problem = ({ id }) => {
   }
 
   return (
-    <div className='min-h-screen bg-background'>
-      <ProblemHeader
-        problem={problem}
-        selectedLanguage={selectedLanguage}
-        onLanguageChange={handleLanguageChange}
-        isBookmarked={isBookmarked}
-        onBookmarkToggle={() => setIsBookmarked(!isBookmarked)}
-      />
-
+    <div className='h-full w-full'>
       <ProblemContent
+        onLanguageChange={handleLanguageChange}
         activeTab={activeTab}
         setActiveTab={setActiveTab}
         problem={problem}

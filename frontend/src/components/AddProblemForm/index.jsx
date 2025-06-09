@@ -10,7 +10,6 @@ import { sampleProblemData } from "./utils/sample-problem-data";
 import { sampleStringProblem } from "./utils/sample-string-data";
 import { defaultValues } from "./utils/default-values";
 
-import { Card, CardContent } from "@/components/ui/card";
 import { FormHeader } from "./components/form-header";
 import { Form } from "./components/form";
 
@@ -79,32 +78,30 @@ export const AddProblemForm = () => {
   };
 
   return (
-    <div className='container mx-auto py-4 px-1 w-[400px] sm:py-6 sm:px-4 sm:w-xl md:w-2xl lg:w-[54.8rem] max-w-7xl'>
-      <Card>
-        <CardContent className='p-3 sm:p-6'>
-          <FormHeader
-            sampleType={sampleType}
-            setSampleType={setSampleType}
-            loadSampleData={loadSampleData}
-            resetForm={resetForm}
-          />
+    <div className='container mx-auto py-4 px-1 w-[400px] sm:py-6 sm:px-4 sm:w-xl md:w-2xl lg:w-7xl max-w-7xl'>
+      <div className='p-3 sm:p-6'>
+        <FormHeader
+          sampleType={sampleType}
+          setSampleType={setSampleType}
+          loadSampleData={loadSampleData}
+          resetForm={resetForm}
+        />
 
-          <Form
-            register={register}
-            control={control}
-            errors={errors}
-            handleSubmit={handleSubmit}
-            onSubmit={onSubmit}
-            isLoading={isLoading}
-            testCaseFields={testCaseFields}
-            appendTestCase={appendTestCase}
-            removeTestCase={removeTestCase}
-            tagFields={tagFields}
-            appendTag={appendTag}
-            removeTag={removeTag}
-          />
-        </CardContent>
-      </Card>
+        <Form
+          register={register}
+          control={control}
+          errors={errors}
+          handleSubmit={handleSubmit}
+          onSubmit={onSubmit}
+          isLoading={isLoading}
+          testCaseFields={testCaseFields}
+          appendTestCase={appendTestCase}
+          removeTestCase={removeTestCase}
+          tagFields={tagFields}
+          appendTag={appendTag}
+          removeTag={removeTag}
+        />
+      </div>
     </div>
   );
 };

@@ -1,10 +1,10 @@
 import { CheckCircle2, Loader } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { TestCases } from "./test-cases";
-import { Tags } from "./tags";
-import { LanguageSection } from "./language-section";
-import { BasicInfo } from "./basic-info";
-import { AdditionalInfo } from "./additional-info";
+import { TestCases } from "@/components/AddProblemForm/components/test-cases";
+import { Tags } from "@/components/AddProblemForm/components/tags";
+import { LanguageSection } from "@/components/AddProblemForm/components/language-section";
+import { BasicInfo } from "@/components/AddProblemForm/components/basic-info";
+import { AdditionalInfo } from "@/components/AddProblemForm/components/additional-info";
 
 export const Form = ({
   register,

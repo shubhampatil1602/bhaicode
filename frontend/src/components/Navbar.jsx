@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { LogoutButton } from "./LogoutButton";
 import { Link } from "react-router-dom";
+import { ThemeToggle } from "./ThemeToggle";
 
 export const Navbar = () => {
   const { authUser } = useAuthStore();
@@ -49,6 +50,7 @@ export const Navbar = () => {
           <NavbarLogo />
           <NavItems items={navItems} />
           <div className='flex items-center gap-4'>
+            <ThemeToggle />
             <NavbarButton variant='secondary'>
               <DropdownMenu>
                 <DropdownMenuTrigger>
@@ -96,6 +98,10 @@ export const Navbar = () => {
               </a>
             ))}
             <div className='flex w-full flex-col gap-4'>
+              <div className='flex items-center justify-between px-4 py-2'>
+                <span className='text-sm font-medium'>Theme</span>
+                <ThemeToggle />
+              </div>
               <NavbarButton>
                 <DropdownMenu>
                   <DropdownMenuTrigger className='w-full'>

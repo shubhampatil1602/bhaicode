@@ -6,7 +6,7 @@ export const DifficultyButton = ({ difficulty }) => {
   };
   return (
     <span
-      className={`px-2 py-1 rounded-full text-xs font-medium border ${colors[difficulty]}`}
+      className={`px-2 py-1 rounded-full text-xs font-semibold border ${colors[difficulty]}`}
     >
       {difficulty}
     </span>

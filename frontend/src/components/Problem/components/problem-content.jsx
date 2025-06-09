@@ -17,10 +17,11 @@ export const ProblemContent = ({
   isExecuting,
   testCases,
   submission,
+  onLanguageChange,
 }) => {
   return (
-    <div className='mx-auto w-full max-w-7xl'>
-      <div className='flex gap-0 h-[calc(100vh-8rem)]'>
+    <div className='mx-auto w-full max-full px-3'>
+      <div className='flex gap-2 h-[calc(100vh-8rem)]'>
         <Resizable
           defaultSize={{ width: "50%", height: "100%" }}
           enable={{ right: true }}
@@ -37,7 +38,7 @@ export const ProblemContent = ({
             },
           }}
         >
-          <div className='h-full bg-background overflow-y-auto'>
+          <div className='h-full bg-background overflow-y-auto border border-neutral-200 dark:border-neutral-800 rounded-lg'>
             <ProblemTabs
               activeTab={activeTab}
               onTabChange={setActiveTab}
@@ -49,7 +50,7 @@ export const ProblemContent = ({
           </div>
         </Resizable>
 
-        <div className='flex-1 bg-background overflow-hidden'>
+        <div className='flex-1 bg-background overflow-hidden border border-neutral-200 dark:border-neutral-800 rounded-lg'>
           <ProblemEditor
             code={code}
             onCodeChange={setCode}
@@ -57,6 +58,7 @@ export const ProblemContent = ({
             onRunCode={handleRunCode}
             isExecuting={isExecuting}
             problem={problem}
+            onLanguageChange={onLanguageChange}
           />
         </div>
       </div>

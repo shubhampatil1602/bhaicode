@@ -12,49 +12,23 @@ import { Controller } from "react-hook-form";
 
 export const BasicInfo = ({ register, control, errors }) => {
   return (
-    <div className='grid grid-cols-1 gap-4 sm:gap-6'>
+    <div className='grid grid-cols-1 lg:grid-cols-2 gap-6'>
       <div className='space-y-2'>
-        <Label htmlFor='title' className='text-sm sm:text-base font-medium'>
-          Title
-        </Label>
+        <Label className='text-base font-medium text-foreground'>Title</Label>
         <Input
-          id='title'
-          className='w-full text-sm sm:text-base'
+          className='text-base focus:ring-2 focus:ring-primary/20 transition-all duration-200'
           {...register("title")}
           placeholder='Enter problem title'
         />
         {errors.title && (
-          <p className='text-xs sm:text-sm text-destructive'>
+          <p className='text-sm text-destructive font-medium'>
             {errors.title.message}
           </p>
         )}
       </div>
 
       <div className='space-y-2'>
-        <Label
-          htmlFor='description'
-          className='text-sm sm:text-base font-medium'
-        >
-          Description
-        </Label>
-        <Textarea
-          id='description'
-          className='min-h-24 w-full text-sm sm:text-base resize-y'
-          {...register("description")}
-          placeholder='Enter problem description'
-        />
-        {errors.description && (
-          <p className='text-xs sm:text-sm text-destructive'>
-            {errors.description.message}
-          </p>
-        )}
-      </div>
-
-      <div className='space-y-2'>
-        <Label
-          htmlFor='difficulty'
-          className='text-sm sm:text-base font-medium'
-        >
+        <Label className='text-base font-medium text-foreground'>
           Difficulty
         </Label>
         <Controller
@@ -63,20 +37,45 @@ export const BasicInfo = ({ register, control, errors }) => {
           defaultValue=''
           render={({ field: { value, onChange } }) => (
             <Select value={value || ""} onValueChange={onChange}>
-              <SelectTrigger className='w-full'>
+              <SelectTrigger className='text-base focus:ring-2 focus:ring-primary/20 transition-all duration-200 w-full'>
                 <SelectValue placeholder='Select difficulty' />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value='EASY'>Easy</SelectItem>
-                <SelectItem value='MEDIUM'>Medium</SelectItem>
-                <SelectItem value='HARD'>Hard</SelectItem>
+                <SelectItem value='EASY' className='text-green-600 font-medium'>
+                  Easy
+                </SelectItem>
+                <SelectItem
+                  value='MEDIUM'
+                  className='text-yellow-600 font-medium'
+                >
+                  Medium
+                </SelectItem>
+                <SelectItem value='HARD' className='text-red-600 font-medium'>
+                  Hard
+                </SelectItem>
               </SelectContent>
             </Select>
           )}
         />
         {errors.difficulty && (
-          <p className='text-xs sm:text-sm text-destructive'>
+          <p className='text-sm text-destructive font-medium'>
             {errors.difficulty.message}
+          </p>
+        )}
+      </div>
+
+      <div className='space-y-2 lg:col-span-2'>
+        <Label className='text-base font-medium text-foreground'>
+          Description
+        </Label>
+        <Textarea
+          className='min-h-32 text-base focus:ring-2 focus:ring-primary/20 transition-all duration-200 resize-y'
+          {...register("description")}
+          placeholder='Enter problem description'
+        />
+        {errors.description && (
+          <p className='text-sm text-destructive font-medium'>
+            {errors.description.message}
           </p>
         )}
       </div>

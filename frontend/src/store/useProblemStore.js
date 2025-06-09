@@ -52,11 +52,12 @@ export const useProblemStore = create((set) => ({
     }
   },
 
-  updateProblem: async (id) => {
+  updateProblem: async (id, problemData) => {
     try {
       set({ isProblemLoading: true });
       const response = await axiosInstance.put(
-        `/problems/update-problem/${id}`
+        `/problems/update-problem/${id}`,
+        problemData
       );
       set((state) => ({
         problems: state.problems.map((problem) =>

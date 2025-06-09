@@ -4,7 +4,11 @@ import { useParams } from "react-router-dom";
 const ProblemPage = () => {
   const { id } = useParams();
 
-  return <Problem id={id} />;
+  return (
+    <div className='h-full min-h-screen w-screen'>
+      <Problem id={id} />
+    </div>
+  );
 };
 
 export default ProblemPage;
