@@ -80,7 +80,7 @@ export const Signin = ({ className, ...props }) => {
           className='w-full disabled:pointer-events-none disabled:cursor-not-allowed transition-all duration-300 ease-in-out hover:bg-primary/80 hover:text-primary-foreground'
         >
           {signInLoader && (
-            <Loader className='animate-spin h-5 w-5 text-white' />
+            <Loader className='animate-spin h-5 w-5 text-primary' />
           )}{" "}
           Sign In
         </Button>
