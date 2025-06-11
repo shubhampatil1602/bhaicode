@@ -97,7 +97,7 @@ export const SubmissionsList = ({ submissions, isLoading }) => {
   }
 
   return (
-    <div className='rounded-md border'>
+    <div className='rounded-md border border-neutral-200 dark:border-neutral-800'>
       <Table>
         <TableHeader>
           <TableRow>

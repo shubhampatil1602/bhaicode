@@ -14,7 +14,7 @@ const HomePage = () => {
   }
 
   return (
-    <section className='w-full flex flex-col items-center justify-center  px-4'>
+    <section className='w-full flex flex-col items-center justify-center px-4 pt-20 md:pt-24'>
       <h1 className='text-4xl font-extrabold z-10 text-center'>
         Welcome to <span className='text-primary'>Bhaicode</span>
       </h1>

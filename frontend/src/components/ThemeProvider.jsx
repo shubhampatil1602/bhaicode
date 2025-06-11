@@ -15,7 +15,6 @@ export function ThemeProvider({ children }) {
   }, []);
 
   useEffect(() => {
-    console.log("Theme changed to:", theme);
     const root = window.document.documentElement;
 
     // Remove existing theme classes
@@ -26,12 +25,10 @@ export function ThemeProvider({ children }) {
         .matches
         ? "dark"
         : "light";
-      console.log("System theme detected:", systemTheme);
       root.classList.add(systemTheme);
       return;
     }
 
-    console.log("Adding theme class:", theme);
     root.classList.add(theme);
   }, [theme]);
 
@@ -41,7 +38,6 @@ export function ThemeProvider({ children }) {
 
     const handleChange = (e) => {
       if (theme === "system") {
-        console.log("System theme changed to:", e.matches ? "dark" : "light");
         const root = window.document.documentElement;
         root.classList.remove("light", "dark");
         root.classList.add(e.matches ? "dark" : "light");
@@ -55,7 +51,6 @@ export function ThemeProvider({ children }) {
   const value = {
     theme,
     setTheme: (newTheme) => {
-      console.log("Setting theme to:", newTheme);
       setTheme(newTheme);
     },
   };

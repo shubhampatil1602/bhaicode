@@ -32,7 +32,7 @@ export const ProblemTable = ({
   onAddToPlaylist,
 }) => {
   return (
-    <div className='overflow-x-auto rounded-xl shadow-md'>
+    <div className='border border-gray-200 dark:border-gray-800 overflow-x-auto rounded-xl shadow-md'>
       <Table>
         <TableHeader>
           <TableRow>

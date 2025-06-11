@@ -14,7 +14,7 @@ export const ProblemTestCases = ({ testCases, submission }) => {
       <div className='mb-4'>
         <h3 className='text-xl font-semibold'>Test Cases</h3>
       </div>
-      <div className='rounded-md border'>
+      <div className='rounded-md border border-neutral-200 dark:border-neutral-800'>
         <Table>
           <TableHeader>
             <TableRow>

@@ -28,6 +28,7 @@ export const useAuthStore = create((set) => ({
       toast.success(res.data.message);
     } catch (error) {
       console.log("signup error ", error);
+
       toast.error("Error signing up");
     } finally {
       set({ isCheckingAuth: false });
@@ -38,11 +39,21 @@ export const useAuthStore = create((set) => ({
     set({ isCheckingAuth: true });
     try {
       const res = await axiosInstance.post("/auth/login", data);
-      set({ authUser: res.data.user, isCheckingAuth: false });
-      toast.success(res.data.message);
+      if (res.data.user) {
+        set({ authUser: res.data.user, isCheckingAuth: false });
+        toast.success(res.data.message);
+        return { success: true };
+      } else {
+        set({ authUser: null, isCheckingAuth: false });
+        toast.error("Invalid credentials");
+        return { success: false };
+      }
     } catch (error) {
+      set({ authUser: null });
       console.log("signin error ", error);
-      toast.error("Error signing in");
+      const errorMessage = error.response?.data?.message || "Error signing in";
+      toast.error(errorMessage);
+      return { success: false };
     } finally {
       set({ isCheckingAuth: false });
     }

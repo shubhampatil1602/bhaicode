@@ -26,7 +26,7 @@ export const ProblemEditor = ({
 
   return (
     <Tabs defaultValue='editor' className='h-full flex flex-col gap-0'>
-      <TabsList className='w-full flex justify-between rounded-none border-0 bg-muted border-b rounded-tr-lg rounded-tl-lg border-neutral-200 dark:border-neutral-800'>
+      <TabsList className='w-full flex justify-between rounded-none border-0 bg-muted/60 border-b rounded-tr-lg rounded-tl-lg border-neutral-50 dark:border-neutral-800'>
         <div className='flex gap-2 items-center px-3 py-2 text-sm font-medium text-black dark:text-neutral-200'>
           <Code2 className='w-4 h-4' />
           Code

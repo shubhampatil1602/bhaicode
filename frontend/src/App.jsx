@@ -8,12 +8,13 @@ import SignupPage from "./pages/SignupPage";
 import SigninPage from "./pages/SigninPage";
 import AddProblem from "./pages/AddProblem";
 import ProblemPage from "./pages/ProblemPage";
-import { PublicRoute } from "./components/PublicRoute";
+import { AuthRoute } from "./components/PublicRoute";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { AdminRoute } from "./components/AdminRoute";
 import { Layout } from "./components/Layout";
 import { Loader } from "lucide-react";
 import EditProblem from "./pages/EditProblem";
+import LandingPage from "./pages/LandingPage";
 
 const App = () => {
   const { authUser, checkAuth, isCheckingAuth } = useAuthStore();
@@ -39,16 +40,18 @@ const App = () => {
   }
 
   return (
-    <div className='flex flex-col items-center justify-start min-h-screen bg-background text-foreground'>
+    <div>
       <Routes>
-        <Route element={<PublicRoute authUser={authUser} />}>
+        <Route element={<Layout />}>
+          <Route path='/' element={<LandingPage />} />
+        </Route>
+        <Route element={<AuthRoute authUser={authUser} />}>
           <Route path='/signin' element={<SigninPage />} />
           <Route path='/signup' element={<SignupPage />} />
         </Route>
-
         <Route element={<ProtectedRoute authUser={authUser} />}>
           <Route element={<Layout />}>
-            <Route path='/' index element={<HomePage />} />
+            <Route path='/all-problems' element={<HomePage />} />
             <Route path='/problem/:id' element={<ProblemPage />} />
 
             <Route element={<AdminRoute />}>
@@ -64,5 +67,4 @@ const App = () => {
     </div>
   );
 };
-
 export default App;

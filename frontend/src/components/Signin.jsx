@@ -29,10 +29,12 @@ export const Signin = ({ className, ...props }) => {
   const onSubmit = async (data) => {
     try {
       setSignInLoader(true);
-      signIn(data);
-      navigate("/");
+      const result = await signIn(data);
+      if (result.success) {
+        navigate("/");
+      }
     } catch (err) {
-      console.error(err);
+      console.error("Sign in error:", err);
     } finally {
       setSignInLoader(false);
     }

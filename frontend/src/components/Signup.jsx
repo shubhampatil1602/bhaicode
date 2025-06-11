@@ -29,8 +29,10 @@ export const Signup = ({ className, ...props }) => {
   const onSubmit = async (data) => {
     try {
       setSignUpLoader(true);
-      await signUp(data);
-      navigate("/");
+      const result = await signUp(data);
+      if (result.success) {
+        navigate("/");
+      }
     } catch (err) {
       console.error(err);
     } finally {
