@@ -6,4 +6,3 @@
 - generate sample problem with ai
 - solution feedback by ai
 - solution video tab (yt)
-- landing page

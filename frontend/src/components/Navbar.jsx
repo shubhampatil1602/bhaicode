@@ -9,11 +9,10 @@ import {
 } from "motion/react";
 
 import { Link } from "react-router-dom";
-import { IconMoon, IconSun, IconChevronDown } from "@tabler/icons-react";
+import { IconMoon, IconSun } from "@tabler/icons-react";
 import { useTheme } from "./ThemeProvider";
 import { Code2 } from "lucide-react";
 import { useAuthStore } from "@/store/useAuthStore";
-import { ThemeToggle } from "./ThemeToggle";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -49,10 +48,6 @@ export function Navbar() {
       ];
     } else {
       return [
-        {
-          title: "All Problems",
-          href: "/all-problems",
-        },
         {
           title: "Contests",
           href: "/contests",
