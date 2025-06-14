@@ -1,5 +1,5 @@
 import Editor from "@monaco-editor/react";
-import { Play, Loader, Share2, Code2 } from "lucide-react";
+import { Share2, Code2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList } from "@/components/ui/tabs";
 import {
@@ -14,8 +14,6 @@ export const ProblemEditor = ({
   code,
   onCodeChange,
   selectedLanguage,
-  onRunCode,
-  isExecuting,
   problem,
   onLanguageChange,
 }) => {
@@ -68,27 +66,6 @@ export const ProblemEditor = ({
               padding: { top: 16, bottom: 16 },
             }}
           />
-        </div>
-
-        <div className='p-4 border-t border-border bg-background'>
-          <div className='flex justify-between items-center gap-4'>
-            <Button
-              onClick={onRunCode}
-              disabled={isExecuting}
-              className='gap-2'
-              variant='outline'
-            >
-              {!isExecuting && <Play className='w-4 h-4' />}
-              {isExecuting ? (
-                <Loader className='size-4 animate-spin' />
-              ) : (
-                "Run Code"
-              )}
-            </Button>
-            <Button variant='default' className='gap-2'>
-              Submit Solution
-            </Button>
-          </div>
         </div>
       </TabsContent>
     </Tabs>

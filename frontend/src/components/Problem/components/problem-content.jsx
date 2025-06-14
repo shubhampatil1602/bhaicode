@@ -1,7 +1,8 @@
-import { Resizable } from "re-resizable";
 import { ProblemTabs } from "./problem-tabs";
 import { ProblemEditor } from "./problem-editor";
 import { ProblemTestCases } from "./problem-test-cases";
+import { PanelGroup, Panel, PanelResizeHandle } from "react-resizable-panels";
+import { SubmissionResults } from "./submission-results";
 
 export const ProblemContent = ({
   activeTab,
@@ -21,49 +22,47 @@ export const ProblemContent = ({
 }) => {
   return (
     <div className='mx-auto w-full max-full px-3'>
-      <div className='flex gap-2 h-[calc(100vh-8rem)]'>
-        <Resizable
-          defaultSize={{ width: "50%", height: "100%" }}
-          enable={{ right: true }}
-          className='min-w-[30%] max-w-[70%]'
-          handleStyles={{
-            right: {
-              width: "4px",
-              right: "-2px",
-              cursor: "col-resize",
-              backgroundColor: "hsl(var(--border))",
-              "&:hover": {
-                backgroundColor: "hsl(var(--primary))",
-              },
-            },
-          }}
-        >
-          <div className='h-full bg-background overflow-y-auto border border-neutral-200 dark:border-neutral-800 rounded-lg'>
-            <ProblemTabs
-              activeTab={activeTab}
-              onTabChange={setActiveTab}
-              problem={problem}
-              submissionCount={submissionCount}
-              submissions={submissions}
-              isSubmissionsLoading={isSubmissionsLoading}
-            />
-          </div>
-        </Resizable>
-
-        <div className='flex-1 bg-background overflow-hidden border border-neutral-200 dark:border-neutral-800 rounded-lg'>
-          <ProblemEditor
-            code={code}
-            onCodeChange={setCode}
-            selectedLanguage={selectedLanguage}
-            onRunCode={handleRunCode}
-            isExecuting={isExecuting}
-            problem={problem}
-            onLanguageChange={onLanguageChange}
-          />
-        </div>
+      <div className='h-[calc(100vh-8rem)]'>
+        <PanelGroup direction='horizontal'>
+          <Panel defaultSize={40} minSize={20}>
+            <div className='h-full overflow-y-auto border border-neutral-200 dark:border-neutral-800 rounded-lg mr-'>
+              <ProblemTabs
+                activeTab={activeTab}
+                onTabChange={setActiveTab}
+                problem={problem}
+                submissionCount={submissionCount}
+                submissions={submissions}
+                isSubmissionsLoading={isSubmissionsLoading}
+              />
+            </div>
+          </Panel>
+          <PanelResizeHandle className='w-1.5 h-16 relative top-1/2 bg-neutral-300 hover:bg-primary transition-colors flex justify-center items-center' />
+          <Panel defaultSize={60} minSize={30}>
+            <PanelGroup direction='vertical'>
+              <Panel defaultSize={60} minSize={30}>
+                <ProblemEditor
+                  code={code}
+                  onCodeChange={setCode}
+                  selectedLanguage={selectedLanguage}
+                  onRunCode={handleRunCode}
+                  isExecuting={isExecuting}
+                  problem={problem}
+                  onLanguageChange={onLanguageChange}
+                />
+              </Panel>
+              <PanelResizeHandle className='w-20 h-1.5 relative left-[45%] bg-neutral-300 hover:bg-primary transition-colors' />
+              <Panel defaultSize={40} minSize={20}>
+                <ProblemTestCases
+                  testCases={testCases}
+                  submission={submission}
+                />
+              </Panel>
+            </PanelGroup>
+          </Panel>
+        </PanelGroup>
       </div>
 
-      <ProblemTestCases testCases={testCases} submission={submission} />
+      {submission && <SubmissionResults submission={submission} />}
     </div>
   );
 };

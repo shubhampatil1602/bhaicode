@@ -5,6 +5,8 @@ import { useExecutionStore } from "@/store/useExecutionStore";
 import { ProblemContent } from "./components/problem-content";
 import { ProblemLoading } from "./components/problem-loading";
 import { getLanguageId } from "./utils/languageUtils";
+import { Button } from "../ui/button";
+import { Loader, Play } from "lucide-react";
 
 export const Problem = ({ id }) => {
   const [code, setCode] = useState("");
@@ -72,6 +74,22 @@ export const Problem = ({ id }) => {
 
   return (
     <div className='h-full w-full'>
+      <div className='p-4'>
+        <div className='flex justify-center items-center gap-2'>
+          <Button
+            onClick={handleRunCode}
+            disabled={isExecuting}
+            className='gap-2'
+            variant='outline'
+          >
+            {!isExecuting && <Play className='w-4 h-4' />}
+            {isExecuting && <Loader className='size-4 animate-spin' />}
+          </Button>
+          <Button variant='default' className='gap-2'>
+            Submit Solution
+          </Button>
+        </div>
+      </div>
       <ProblemContent
         onLanguageChange={handleLanguageChange}
         activeTab={activeTab}

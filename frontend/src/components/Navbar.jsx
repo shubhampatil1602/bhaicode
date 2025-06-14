@@ -84,7 +84,7 @@ export function Navbar() {
             y,
           }}
           transition={{ duration: 0.3, ease: "linear" }}
-          className={`mb-px mx-auto flex max-w-7xl items-center justify-between rounded-full bg-primary/10 px-3 py-2 backdrop-blur-sm dark:bg-primary/5 ${
+          className={`mb-px mx-auto flex max-w-7xl items-center justify-between rounded-full bg-primary/10 px-3 py-2 backdrop-blur-sm dark:bg-neutral-950/50 ${
             scrolled ? "shadow-custom" : ""
           }`}
         >
@@ -120,24 +120,17 @@ export function Navbar() {
                 <DropdownMenuContent align='end' className='w-40'>
                   <DropdownMenuItem asChild className='relative'>
                     <Link to='/profile' className='w-full'>
-                      <motion.div
-                        className='absolute inset-0 bg-primary/20 rounded-sm'
-                        initial={{ opacity: 0 }}
-                        whileHover={{ opacity: 1 }}
-                        transition={{ duration: 0.2 }}
-                      />
-                      <span className='relative z-10'>Profile</span>
+                      <span>Profile</span>
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild className='relative'>
                     <Link to='/add-problem' className='w-full'>
-                      <motion.div
-                        className='absolute inset-0 bg-primary/20 rounded-sm'
-                        initial={{ opacity: 0 }}
-                        whileHover={{ opacity: 1 }}
-                        transition={{ duration: 0.2 }}
-                      />
-                      <span className='relative z-10'>Add Problem</span>
+                      <span>Add Problem</span>
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild className='relative'>
+                    <Link to='/all-problems' className='w-full'>
+                      <span>All Problems</span>
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild className='relative'>
@@ -158,13 +151,7 @@ export function Navbar() {
                 <DropdownMenuContent align='end' className='w-40'>
                   <DropdownMenuItem asChild className='relative'>
                     <Link to='/profile' className='w-full'>
-                      <motion.div
-                        className='absolute inset-0 bg-primary/20 rounded-sm'
-                        initial={{ opacity: 0 }}
-                        whileHover={{ opacity: 1 }}
-                        transition={{ duration: 0.2 }}
-                      />
-                      <span className='relative z-10'>Profile</span>
+                      <span>Profile</span>
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild className='relative'>

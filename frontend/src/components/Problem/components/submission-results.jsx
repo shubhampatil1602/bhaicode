@@ -34,10 +34,10 @@ export const SubmissionResults = ({ submission }) => {
   const successRate = (passedTests / totalTests) * 100;
 
   return (
-    <div className='space-y-6 my-6'>
+    <div id='test-case-results' className='space-y-6 my-6'>
       {/* Overall Status */}
       <div className='grid grid-cols-1 md:grid-cols-4 gap-4'>
-        <div className='p-6 rounded-lg border bg-card'>
+        <div className='p-6 rounded-lg border border-gray-200 dark:border-neutral-800 bg-card'>
           <div className='flex flex-col space-y-2'>
             <h3 className='text-sm font-medium text-muted-foreground'>
               Status
@@ -55,7 +55,7 @@ export const SubmissionResults = ({ submission }) => {
           </div>
         </div>
 
-        <div className='p-6 rounded-lg border bg-card'>
+        <div className='p-6 rounded-lg border border-gray-200 dark:border-neutral-800 bg-card'>
           <div className='flex flex-col space-y-2'>
             <h3 className='text-sm font-medium text-muted-foreground'>
               Success Rate
@@ -69,7 +69,7 @@ export const SubmissionResults = ({ submission }) => {
           </div>
         </div>
 
-        <div className='p-6 rounded-lg border bg-card'>
+        <div className='p-6 rounded-lg border border-gray-200 dark:border-neutral-800 bg-card'>
           <div className='flex flex-col space-y-2'>
             <h3 className='text-sm font-medium text-muted-foreground flex items-center gap-2'>
               <Clock className='w-4 h-4' />
@@ -79,7 +79,7 @@ export const SubmissionResults = ({ submission }) => {
           </div>
         </div>
 
-        <div className='p-6 rounded-lg border bg-card'>
+        <div className='p-6 rounded-lg border border-gray-200 dark:border-neutral-800 bg-card'>
           <div className='flex flex-col space-y-2'>
             <h3 className='text-sm font-medium text-muted-foreground flex items-center gap-2'>
               <Memory className='w-4 h-4' />
@@ -95,7 +95,7 @@ export const SubmissionResults = ({ submission }) => {
         <div className='mb-4'>
           <h3 className='text-xl font-semibold'>Test Cases Results</h3>
         </div>
-        <div className='rounded-md border'>
+        <div className='rounded-md border border-gray-200 dark:border-neutral-800'>
           <Table>
             <TableHeader>
               <TableRow>
