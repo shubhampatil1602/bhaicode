@@ -281,13 +281,83 @@ export function Navbar() {
               >
                 <Link
                   className='text-2xl font-medium text-neutral-800 transition-colors hover:text-neutral-500 dark:text-neutral-200 dark:hover:text-neutral-400'
-                  href={item.href}
+                  to={item.href}
                   onClick={() => setIsMenuOpen(!isMenuOpen)}
                 >
                   {item.title}
                 </Link>
               </motion.div>
             ))}
+            {authUser && authUser.role === "ADMIN" && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: 0.3, ease: "linear" }}
+              >
+                <Link
+                  className='text-2xl font-medium text-neutral-800 transition-colors hover:text-neutral-500 dark:text-neutral-200 dark:hover:text-neutral-400'
+                  to='/add-problem'
+                  onClick={() => setIsMenuOpen(!isMenuOpen)}
+                >
+                  Add Problem
+                </Link>
+              </motion.div>
+            )}
+            {authUser && (
+              <>
+                <motion.div
+                  initial={{
+                    opacity: 0,
+                    y: 20,
+                  }}
+                  animate={{
+                    opacity: 1,
+                    y: 0,
+                  }}
+                  transition={{
+                    duration: 0.3,
+                    delay: 0.1,
+                    ease: "linear",
+                  }}
+                >
+                  <Link
+                    className='text-2xl font-medium text-neutral-800 transition-colors hover:text-neutral-500 dark:text-neutral-200 dark:hover:text-neutral-400'
+                    to='all-problems'
+                    onClick={() => setIsMenuOpen(!isMenuOpen)}
+                  >
+                    All Problems
+                  </Link>
+                </motion.div>
+                <motion.div
+                  initial={{
+                    opacity: 0,
+                    y: 20,
+                  }}
+                  animate={{
+                    opacity: 1,
+                    y: 0,
+                  }}
+                  transition={{
+                    duration: 0.3,
+                    delay: 0.1,
+                    ease: "linear",
+                  }}
+                >
+                  <Link
+                    className='text-2xl font-medium text-neutral-800 transition-colors hover:text-neutral-500 dark:text-neutral-200 dark:hover:text-neutral-400'
+                    to='/profile'
+                    onClick={() => setIsMenuOpen(!isMenuOpen)}
+                  >
+                    Profile
+                  </Link>
+                </motion.div>
+              </>
+            )}
+            {isMenuOpen && authUser && (
+              <LogoutButton className='text-2xl font-medium text-neutral-800 transition-colors hover:text-neutral-500 dark:text-neutral-200 dark:hover:text-neutral-400'>
+                Logout
+              </LogoutButton>
+            )}
             <ToggleThemeButton theme={theme} setTheme={setTheme} />
           </motion.div>
         )}

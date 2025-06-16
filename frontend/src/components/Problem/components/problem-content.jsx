@@ -15,9 +15,11 @@ export const ProblemContent = ({
   setCode,
   selectedLanguage,
   handleRunCode,
-  isExecuting,
+  isRunning,
+  isSubmitting,
   testCases,
   submission,
+  runResults,
   onLanguageChange,
 }) => {
   return (
@@ -45,7 +47,8 @@ export const ProblemContent = ({
                   onCodeChange={setCode}
                   selectedLanguage={selectedLanguage}
                   onRunCode={handleRunCode}
-                  isExecuting={isExecuting}
+                  isRunning={isRunning}
+                  isSubmitting={isSubmitting}
                   problem={problem}
                   onLanguageChange={onLanguageChange}
                 />
@@ -54,6 +57,7 @@ export const ProblemContent = ({
               <Panel defaultSize={40} minSize={20}>
                 <ProblemTestCases
                   testCases={testCases}
+                  runResults={runResults}
                   submission={submission}
                 />
               </Panel>
