@@ -1,9 +1,11 @@
 import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Plus, Trash2, Tag } from "lucide-react";
+import { useFormContext } from "../context/form-context";
 
-export const Tags = ({ tagFields, register, errors, appendTag, removeTag }) => {
+export const Tags = () => {
+  const { register, errors, tagFields, appendTag, removeTag } =
+    useFormContext();
   return (
     <div className='space-y-6'>
       <div className='flex items-center justify-between'>

@@ -1,15 +1,17 @@
+import { useFormContext } from "../context/form-context";
 import { CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { FileText, Download } from "lucide-react";
 import { IconReload } from "@tabler/icons-react";
 
-export const FormHeader = ({
-  sampleType,
-  setSampleType,
-  loadSampleData,
-  resetForm,
-  isEdit = false,
-}) => {
+export const FormHeader = ({ isEdit = false }) => {
+  const {
+    sampleType,
+    handleSetSampleType,
+    loadSampleData,
+    resetForm,
+    editResetForm,
+  } = useFormContext();
   return (
     <div className='flex flex-col gap-4 mb-4 sm:mb-6 pb-4 border-b'>
       {!isEdit ? (
@@ -25,7 +27,7 @@ export const FormHeader = ({
                 type='button'
                 variant={sampleType === "DP" ? "default" : "outline"}
                 className='flex-1 rounded-r-none'
-                onClick={() => setSampleType("DP")}
+                onClick={() => handleSetSampleType("DP")}
               >
                 Sample DP Problem
               </Button>
@@ -33,7 +35,7 @@ export const FormHeader = ({
                 type='button'
                 variant={sampleType === "string" ? "default" : "outline"}
                 className='flex-1 rounded-l-none'
-                onClick={() => setSampleType("string")}
+                onClick={() => handleSetSampleType("string")}
               >
                 Sample String Problem
               </Button>
@@ -53,7 +55,7 @@ export const FormHeader = ({
                 type='button'
                 variant='secondary'
                 className='flex-1 sm:w-auto gap-2'
-                onClick={resetForm}
+                onClick={isEdit ? editResetForm : resetForm}
               >
                 <IconReload className='size-4' />
                 Reset Form

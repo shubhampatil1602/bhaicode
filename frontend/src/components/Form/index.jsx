@@ -2,27 +2,15 @@ import { useState } from "react";
 import { CheckCircle2, Loader, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { TestCases } from "./test-cases";
-import { Tags } from "./tags";
-import { LanguageSection } from "./language-section";
-import { BasicInfo } from "./basic-info";
-import { AdditionalInfo } from "./additional-info";
+import { TestCases } from "./components/test-cases";
+import { Tags } from "./components/tags";
+import { LanguageSection } from "./components/language-section";
+import { BasicInfo } from "./components/basic-info";
+import { AdditionalInfo } from "./components/additional-info";
+import { useFormContext } from "./context/form-context";
+import { addProblemStore } from "../AddProblemForm/store/add-problem";
 
-export const Form = ({
-  register,
-  control,
-  errors,
-  handleSubmit,
-  onSubmit,
-  isLoading,
-  testCaseFields,
-  appendTestCase,
-  removeTestCase,
-  tagFields,
-  appendTag,
-  removeTag,
-  isEdit = false,
-}) => {
+export const Form = ({ handleFormSubmit, isEdit = false }) => {
   const [currentTab, setCurrentTab] = useState("basic");
   const tabs = ["basic", "tags", "testcases", "templates", "additional"];
 
@@ -40,8 +28,11 @@ export const Form = ({
     }
   };
 
+  const { isLoading } = addProblemStore();
+  const { handleSubmit } = useFormContext();
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className='space-y-8'>
+    <form onSubmit={handleSubmit(handleFormSubmit)} className='space-y-8'>
       <Tabs value={currentTab} onValueChange={setCurrentTab} className='w-full'>
         <TabsList className='grid w-full grid-cols-5'>
           <TabsTrigger value='basic'>Basic Info</TabsTrigger>
@@ -56,7 +47,7 @@ export const Form = ({
             <h2 className='text-xl font-semibold mb-6 text-foreground'>
               Basic Information
             </h2>
-            <BasicInfo register={register} control={control} errors={errors} />
+            <BasicInfo />
           </div>
         </TabsContent>
 
@@ -65,13 +56,7 @@ export const Form = ({
             <h2 className='text-xl font-semibold mb-6 text-foreground'>
               Problem Tags
             </h2>
-            <Tags
-              tagFields={tagFields}
-              register={register}
-              errors={errors}
-              appendTag={appendTag}
-              removeTag={removeTag}
-            />
+            <Tags />
           </div>
         </TabsContent>
 
@@ -80,13 +65,7 @@ export const Form = ({
             <h2 className='text-xl font-semibold mb-6 text-foreground'>
               Test Cases
             </h2>
-            <TestCases
-              testCaseFields={testCaseFields}
-              register={register}
-              errors={errors}
-              appendTestCase={appendTestCase}
-              removeTestCase={removeTestCase}
-            />
+            <TestCases />
           </div>
         </TabsContent>
 
@@ -97,12 +76,7 @@ export const Form = ({
             </h2>
             <div className='space-y-8'>
               {["JAVASCRIPT", "PYTHON", "JAVA"].map((language) => (
-                <LanguageSection
-                  key={language}
-                  language={language}
-                  control={control}
-                  register={register}
-                />
+                <LanguageSection key={language} language={language} />
               ))}
             </div>
           </div>
@@ -113,7 +87,7 @@ export const Form = ({
             <h2 className='text-xl font-semibold mb-6 text-foreground'>
               Additional Information
             </h2>
-            <AdditionalInfo register={register} />
+            <AdditionalInfo />
           </div>
         </TabsContent>
       </Tabs>

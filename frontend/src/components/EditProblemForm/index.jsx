@@ -1,57 +1,22 @@
 import { useState, useEffect } from "react";
-import { useForm, useFieldArray } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { isEqual } from "lodash";
-import { Loader } from "lucide-react";
-
 import { useProblemStore } from "@/store/useProblemStore";
-import { problemSchema } from "../AddProblemForm/utils/schema";
-import { defaultValues } from "../AddProblemForm/utils/default-values";
-import { Card, CardContent } from "@/components/ui/card";
-import { FormHeader } from "../AddProblemForm/components/form-header";
-import { Form } from "../AddProblemForm/components/form";
-import { ConfirmationDialog } from "./components/confirmation-dialog";
 import { ProblemLoading } from "../Problem/components/problem-loading";
+import { Form } from "../Form";
+import { FormHeader } from "../Form/components/form-header";
+import { FormProvider, useFormContext } from "../Form/context/form-context";
+import { ConfirmationDialog } from "./components/confirmation-dialog";
 
-export const EditProblemForm = ({ problemId }) => {
+const EditProblemFormContent = ({ problemId }) => {
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const [formData, setFormData] = useState(null);
   const navigate = useNavigate();
   const { getProblemById, updateProblem, problem, isProblemLoading } =
     useProblemStore();
 
-  const {
-    register,
-    control,
-    handleSubmit,
-    reset,
-    formState: { errors, isDirty },
-  } = useForm({
-    resolver: zodResolver(problemSchema),
-    defaultValues: defaultValues,
-  });
-
-  const {
-    fields: testCaseFields,
-    append: appendTestCase,
-    remove: removeTestCase,
-    replace: replaceTestCases,
-  } = useFieldArray({
-    control,
-    name: "testcases",
-  });
-
-  const {
-    fields: tagFields,
-    append: appendTag,
-    remove: removeTag,
-    replace: replaceTags,
-  } = useFieldArray({
-    control,
-    name: "tags",
-  });
+  const { reset, isDirty, replaceTestCases, replaceTags } = useFormContext();
 
   useEffect(() => {
     getProblemById(problemId);
@@ -104,16 +69,6 @@ export const EditProblemForm = ({ problemId }) => {
     }
   };
 
-  const resetForm = () => {
-    if (problem) {
-      reset({
-        ...problem,
-        hints: problem.hints || "",
-        editorial: problem.editorial || "",
-      });
-    }
-  };
-
   if (isProblemLoading) {
     return <ProblemLoading />;
   }
@@ -121,24 +76,8 @@ export const EditProblemForm = ({ problemId }) => {
   return (
     <div className='container mx-auto py-4 px-1 w-[400px] sm:py-6 sm:px-4 sm:w-xl md:w-2xl lg:w-7xl max-w-7xl'>
       <div className='p-3 sm:p-6'>
-        <FormHeader isEdit={true} resetForm={resetForm} />
-
-        <Form
-          register={register}
-          control={control}
-          errors={errors}
-          handleSubmit={handleSubmit}
-          onSubmit={onSubmit}
-          isLoading={isProblemLoading}
-          testCaseFields={testCaseFields}
-          appendTestCase={appendTestCase}
-          removeTestCase={removeTestCase}
-          tagFields={tagFields}
-          appendTag={appendTag}
-          removeTag={removeTag}
-          isEdit={true}
-        />
-
+        <FormHeader isEdit={true} />
+        <Form handleFormSubmit={onSubmit} isEdit={true} />
         <ConfirmationDialog
           showConfirmDialog={showConfirmDialog}
           setShowConfirmDialog={setShowConfirmDialog}
@@ -146,5 +85,13 @@ export const EditProblemForm = ({ problemId }) => {
         />
       </div>
     </div>
+  );
+};
+
+export const EditProblemForm = ({ problemId }) => {
+  return (
+    <FormProvider>
+      <EditProblemFormContent problemId={problemId} />
+    </FormProvider>
   );
 };

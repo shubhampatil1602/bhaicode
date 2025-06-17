@@ -2,8 +2,10 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Code2, CheckCircle2, FileCode2 } from "lucide-react";
 import { CodeEditor } from "./code-editor";
+import { useFormContext } from "../context/form-context";
 
-export const LanguageSection = ({ language, control, register }) => {
+export const LanguageSection = ({ language }) => {
+  const { register, control } = useFormContext();
   return (
     <div className='space-y-6'>
       <div className='flex items-center gap-2'>

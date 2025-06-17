@@ -2,14 +2,11 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Plus, Trash2, CheckCircle2 } from "lucide-react";
+import { useFormContext } from "../context/form-context";
 
-export const TestCases = ({
-  testCaseFields,
-  register,
-  errors,
-  appendTestCase,
-  removeTestCase,
-}) => {
+export const TestCases = () => {
+  const { register, errors, testCaseFields, appendTestCase, removeTestCase } =
+    useFormContext();
   return (
     <div className='space-y-6'>
       <div className='flex items-center justify-between'>

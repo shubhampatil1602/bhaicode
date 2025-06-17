@@ -9,8 +9,10 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Controller } from "react-hook-form";
+import { useFormContext } from "../context/form-context";
 
-export const BasicInfo = ({ register, control, errors }) => {
+export const BasicInfo = () => {
+  const { register, control, errors } = useFormContext();
   return (
     <div className='grid grid-cols-1 lg:grid-cols-2 gap-6'>
       <div className='space-y-2'>

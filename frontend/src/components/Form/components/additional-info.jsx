@@ -1,8 +1,10 @@
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Lightbulb } from "lucide-react";
+import { useFormContext } from "../context/form-context";
 
-export const AdditionalInfo = ({ register }) => {
+export const AdditionalInfo = () => {
+  const { register } = useFormContext();
   return (
     <div className='space-y-6 dark:bg-neutral-900 p-4 rounded-lg'>
       <div className='flex items-center gap-2'>
